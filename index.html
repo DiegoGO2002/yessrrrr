@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de acceso</title>
+</head>
+<body>
+  <h1>¿Estás en la lista?</h1>
+
+  <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <button onclick="verificar()">Ingresar</button>
+
+  <p id="resultado"></p>
+
+  <div id="pregunta" style="display: none;">
+    <label>¿Qué quieres ver hoy?</label>
+    <input type="text" id="opcion" placeholder="Película, serie, etc.">
+    <button onclick="mostrarEleccion()">Enviar</button>
+    <p id="respuestaFinal"></p>
+    <img id="imagen" style="display: none; width: 300px; border-radius: 10px;">
+  </div>
+
+  <script>
+    const permitidos = ["Afeni", "Marisol", "Sofia", "Esmeralda", "Luis", "Diego", "Mario"];
+
+    function verificar() {
+      let nombre = document.getElementById("nombre").value.trim();
+      let resultado = document.getElementById("resultado");
+      let pregunta = document.getElementById("pregunta");
+      let imagen = document.getElementById("imagen");
+      let respuestaFinal = document.getElementById("respuestaFinal");
+
+      // Limpiar
+      imagen.style.display = "none";
+      respuestaFinal.innerText = "";
+
+      let nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+
+      if (permitidos.includes(nombreFormateado)) {
+        resultado.innerText = "✅ Acceso permitido. Bienvenido " + nombreFormateado;
+        resultado.style.color = "green";
+        pregunta.style.display = "block"; // Mostrar la pregunta
+      } else {
+        resultado.innerText = "❌ Acceso denegado. No estás en la lista.";
+        resultado.style.color = "red";
+        pregunta.style.display = "none";
+      }
+    }
+
+    function mostrarEleccion() {
+  let opcion = document.getElementById("opcion").value.trim().toLowerCase();
+  let respuestaFinal = document.getElementById("respuestaFinal");
+  let imagen = document.getElementById("imagen");
+
+  respuestaFinal.innerText = "🎬 Perfecto, vamos a ver: " + opcion;
+
+  // Aquí usamos tu imagen personalizada
+  imagen.src = "muak.JPG";
+  imagen.style.display = "block";
+    }
+  </script>
+</body>
+</html>
