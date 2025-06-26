@@ -61,12 +61,18 @@
       font-weight: bold;
       display: none;
     }
+
+    #pregunta-opcion {
+      margin-top: 30px;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
   <h1>SE LE SABE</h1>
 
+  <!-- Paso 1: nombre -->
   <div>
     <input type="text" id="nombre" placeholder="¿Cuál es tu nombre?">
     <button onclick="verificar()">Ingresar</button>
@@ -74,33 +80,36 @@
 
   <p id="resultado"></p>
 
-  <div style="margin-top: 30px;">
+  <!-- Paso 2: pregunta después del acceso -->
+  <div id="pregunta-opcion">
     <input type="text" id="opcion" placeholder="¿Qué quieres ver hoy?">
     <button onclick="mostrarEleccion()">Enviar</button>
   </div>
 
   <p id="respuestaFinal"></p>
 
+  <!-- Imagen y mensaje -->
   <div class="contenedor-imagen">
     <img id="imagen" src="muak.jpg" alt="Imagen elegida">
     <p class="texto-bajo" id="mensajeAmor">Te amo mi amor. muak</p>
   </div>
 
   <script>
-    const permitidos = ["Maria", "Marisol", "Sofia", "Esmeralda", "Luis", "Diego", "Mario"];
+    const permitidos = ["Afeni", "Siane", "Sofia", "Esmeralda", "Luis", "Diego", "Mario"];
 
     function verificar() {
       let nombre = document.getElementById("nombre").value.trim();
       let resultado = document.getElementById("resultado");
-
       let nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
 
       if (permitidos.includes(nombreFormateado)) {
         resultado.innerText = "✅ Acceso permitido. Bienvenido " + nombreFormateado;
         resultado.style.color = "green";
+        document.getElementById("pregunta-opcion").style.display = "block"; // Muestra la segunda pregunta
       } else {
         resultado.innerText = "❌ Acceso denegado. No estás en la lista.";
         resultado.style.color = "red";
+        document.getElementById("pregunta-opcion").style.display = "none";
       }
     }
 
@@ -110,11 +119,14 @@
       let imagen = document.getElementById("imagen");
       let mensajeAmor = document.getElementById("mensajeAmor");
 
-      if (opcion) {
-        respuestaFinal.innerText = "🎬 Perfecto, vamos a ver: " + opcion;
-        imagen.src = "muak.jpg";
+      if (opcion === "muak") {
+        respuestaFinal.innerText = "🎬 Mostrando: " + opcion;
         imagen.style.display = "block";
         mensajeAmor.style.display = "block";
+      } else {
+        respuestaFinal.innerText = "⚠️ Opción no reconocida.";
+        imagen.style.display = "none";
+        mensajeAmor.style.display = "none";
       }
     }
   </script>
