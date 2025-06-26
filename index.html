@@ -41,10 +41,24 @@
       font-weight: bold;
     }
 
-    img {
-      margin-top: 20px;
+    .contenedor-imagen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .contenedor-imagen img {
       width: 300px;
       border-radius: 10px;
+      display: none;
+    }
+
+    .texto-bajo {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #d63384;
+      font-weight: bold;
       display: none;
     }
   </style>
@@ -66,10 +80,14 @@
   </div>
 
   <p id="respuestaFinal"></p>
-  <img id="imagen" src="muak.jpg" alt="Imagen elegida">
+
+  <div class="contenedor-imagen">
+    <img id="imagen" src="muak.jpg" alt="Imagen elegida">
+    <p class="texto-bajo" id="mensajeAmor">Te amo mi amor. muak</p>
+  </div>
 
   <script>
-    const permitidos = ["Afeni", "Diego", "Mario"];
+    const permitidos = ["Maria", "Marisol", "Sofia", "Esmeralda", "Luis", "Diego", "Mario"];
 
     function verificar() {
       let nombre = document.getElementById("nombre").value.trim();
@@ -90,11 +108,13 @@
       let opcion = document.getElementById("opcion").value.trim().toLowerCase();
       let respuestaFinal = document.getElementById("respuestaFinal");
       let imagen = document.getElementById("imagen");
+      let mensajeAmor = document.getElementById("mensajeAmor");
 
       if (opcion) {
         respuestaFinal.innerText = "🎬 Perfecto, vamos a ver: " + opcion;
-        imagen.src = "muak.jpg"
+        imagen.src = "muak.jpg";
         imagen.style.display = "block";
+        mensajeAmor.style.display = "block";
       }
     }
   </script>
